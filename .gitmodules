@@ -12,7 +12,7 @@
 	url = https://github.com/scrooloose/nerdcommenter.git
 [submodule "vim-files/vim/bundle/rope"]
 	path = vim-files/vim/bundle/rope
-	url = git://github.com/klen/rope-vim.git
+	url = https://github.com/klen/rope-vim.git
 [submodule "vim-files/vim/bundle/snipmate"]
 	path = vim-files/vim/bundle/snipmate
 	url = https://github.com/msanders/snipmate.vim.git
@@ -27,7 +27,7 @@
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule "vim-files/vim/bundle/command-t"]
 	path = vim-files/vim/bundle/command-t
-	url = git://git.wincent.com/command-t.git
+	url = https://github.com/wincent/Command-T.git
 [submodule "vim-files/vim/bundle/jedi-vim"]
 	path = vim-files/vim/bundle/jedi-vim
-	url = git://github.com/davidhalter/jedi-vim.git
+	url = https://github.com/davidhalter/jedi-vim.git
