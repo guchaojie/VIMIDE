@@ -2,7 +2,7 @@
 
 " Pathogen settings.
 filetype off
-call pathogen#runtime_append_all_bundles()
+call pathogen#incubate()
 filetype plugin indent on
 
 " Make vim incompatbile to vi.
@@ -24,7 +24,7 @@ set showcmd
 set hidden
 set wildmenu
 set wildmode=list:longest
-set visualbell
+"set visualbell
 
 set cursorline
 set ttyfast
@@ -85,10 +85,10 @@ set listchars=tab:▸\ ,eol:¬
 
 " Naviagations using keys up/down/left/right
 " Disabling default keys to learn the hjkl
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
+"nnoremap <up> <nop>
+"nnoremap <down> <nop>
+"nnoremap <left> <nop>
+"nnoremap <right> <nop>
 "inoremap <up> <nop>
 "inoremap <down> <nop>
 "inoremap <left> <nop>
@@ -183,13 +183,13 @@ else
 endif
 
 " Special Settings for Consoles
-"if !has("gui_running")
-"    set t_Co=256
-"    colorschem badwolf
-"endif
+if !has("gui_running")
+    set t_Co=256
+    colorschem badwolf
+endif
 
 " Source the vimrc file after saving it
-"autocmd bufwritepost .vimrc source ~/.vimrc
+autocmd bufwritepost .vimrc source ~/.vimrc
 
 " ========== END Gvim Settings ==========
 
@@ -198,13 +198,26 @@ endif
 
 " Mapping to NERDTree
 nnoremap <C-n> :NERDTreeToggle<cr>
+nmap <silent> <F8> :NERDTreeToggle<cr>
 let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$']
 
-" Mini Buffer some settigns."
-let g:miniBufExplMapWindowNavVim = 1
-let g:miniBufExplMapWindowNavArrows = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
+""""""""""""""""""""""""""""""
+" Minibuffer
+"""""""""""""""""""""""""""""""
 let g:miniBufExplModSelTarget = 1
+let g:miniBufExplorerMoreThanOne = 2
+let g:miniBufExplUseSingleClick = 1
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplVSplit = 25
+let g:miniBufExplSplitBelow=1
+let g:miniBufExplMapCTabSwitchBufs = 1
+autocmd BufRead,BufNew :call UMiniBufExplorer
+let mapleader=","
+
+"Hide some files
+let g:explHideFiles='^\.,.*\.class$,.*\.swp$,.*\.pyc$,.*\.swo$,\.DS_Store$'
+"Hide the help thing..
+let g:explDetailedHelp=0
 
 " Rope Plugin settings
 imap <leader>j <ESC>:RopeGotoDefinition<cr>
@@ -214,6 +227,109 @@ nmap <leader>j <ESC>:RopeGotoDefinition<cr>
 nmap <leader>l <ESC>:TagbarToggle<cr>
 imap <leader>l <ESC>:TagbarToggle<cr>i
 
+let Tlist_Show_One_File=1
+""设置标签子窗口的宽度
+let Tlist_WinWidth=20
+"标签列表窗口显示或隐藏不影响整个gvim窗口大小
+let Tlist_Inc_Winwidth=0
+
+"auto save and load session
+let g:AutoSessionFile=".project.vim"
+let g:OrigPWD=getcwd()
+
+if filereadable(g:AutoSessionFile)
+	au VimEnter * call EnterHandler()
+	au VimLeave * call LeaveHandler()
+endif
+
+function! LeaveHandler()
+	exec "mks!".g:OrigPWD."/".g:AutoSessionFile
+endfunction
+
+function!  EnterHandler()
+	exe "source ".g:AutoSessionFile
+endfunction
+
+
+"scope plugin setting
+if has("cscope")
+    set csprg=/usr/bin/cscope
+	set csto=1
+	set cst
+	set nocsverb
+    " add any database in current directory
+	if filereadable("cscope.out")
+		cs add cscope.out
+    endif
+	set csverb
+endif
+
+nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <F5> :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+function Do_CsTag()
+    if(executable('cscope') && has("cscope") )
+          if(g:iswindows!=1)
+            silent! execute "!find . -name '*.h' -o -name '*.c' -o -name '*.cpp' -o -name '*.java' -o -name '*.cs' > cscope.files"
+        else
+              silent! execute "!dir /b *.c,*.cpp,*.h,*.java,*.cs >> cscope.files"
+          endif
+          silent! execute "!cscope -b"
+          if filereadable("cscope.out")
+            execute "cs add cscope.out"
+        endif
+    endif
+endf
+
+" ***********************************************************
+" --------------------- quickfix ----------------------------
+" ***********************************************************
+
+autocmd FileType c,cpp map <buffer> <leader><space> :w<cr>:make<cr>
+nmap <silent> <F6> :cw 10<cr>
+nmap <silent> <F7> :cp<cr>
+nmap <silent> <F3> :cn<cr>
+nmap <silent> <leader>lv :lv /<c-r>=expand("<cword>")<cr>/%<cr>:lw<cr>
+map <silent> <F9> :cclose<cr>
+
+nmap <silent> <F4> :call PreviewWord()<cr>
+nmap <silent> <C-F4> :pclose<cr>
+"nmap <silent> <F8> :WMToggle<cr>
+nmap wm :WMToggle<cr>
+
+func PreviewWord()
+if &previewwindow " 不要在预览窗口里执行
+     return
+ endif
+ let w = expand("<cword>") " 在当前光标位置抓词
+ let cwin = winnr()
+ if w =~ '\a' " 如果该单词包括一个字母
+      try
+        exe "botright ptag " . w
+   catch
+         return
+    endtry 
+   silent! wincmd P "跳转至预览窗口
+      if &previewwindow " 如果确实转到了预览窗口……
+      if has("folding")
+         silent! .foldopen "展开折叠的行
+       endif
+         call search("$", "b") " 到前一行的行尾
+       let w = substitute(w, '\\', '\\\\', "")
+         call search('\<\V' . w . '\>') "定位光标在匹配的单词上
+       "给在此位置的单词加上匹配高亮
+         hi previewWord term=bold ctermbg=green 
+       exe 'match previewWord "\%' . line(".") . 'l\%' . col(".") . 'c\k*"'
+      endif
+  endif
+  exe cwin."wincmd w"
+  endfun
 
 " =========== END Plugin Settings =========="
 "
