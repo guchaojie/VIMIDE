@@ -69,9 +69,10 @@ let s:bwc.dalespale = ['fade3e', 221]
 
 " A beautiful tan from Tomorrow Night.
 let s:bwc.dirtyblonde = ['f4cf86', 222]
+let s:bwc.lightred = ['f4cf86', 213]
 
 " Delicious, chewy red from Made of Code for the poppiest highlights.
-let s:bwc.taffy = ['ff2c4b', 196]
+let s:bwc.taffy = ['ff2c4b', 28]
 
 " The star of the show comes straight from Made of Code.
 let s:bwc.tardis = ['0a9dff', 39]
@@ -214,7 +215,7 @@ call HL('Todo',           'snow', 'bg', 'bold')
 call HL('SpecialComment', 'snow', 'bg', 'bold')
 
 " Strings are a nice, pale straw color.  Nothing too fancy.
-call HL('String', 'dirtyblonde')
+call HL('String', 'lightred')
 
 " Control flow stuff is taffy.
 call HL('Statement',   'taffy', '', 'bold')

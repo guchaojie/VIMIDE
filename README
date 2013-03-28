@@ -1,6 +1,7 @@
 Check my blog for full documentation about VIM and how to setup it up.
 
 http://haridas.in/vim-as-your-ide.html
+http://blog.csdn.net/wooin/article/details/1858917
 
 
 We can start the installation by picking my Git Repository,
@@ -24,3 +25,12 @@ Thats it, now open your vim, you can see all the features described above are be
 $ cd <path-to>VIMIDE/vim-files/vim/bundle/command-t/ruby/command-t
 $ ruby extconf.rb
 $ make
+
+Ctags:生成函数，变量, 结构, 宏的索引，方便查询跳转
+TagList：列出了当前文件中的所有宏, 全局变量, 函数名等
+NerdTree:文件浏览窗口
+NerdCommenter:注释指定代码段
+Minibuffer:打开文件的标签
+QuickFix:提示代码中的不合规范的地方
+winmanager:界面管理
+
