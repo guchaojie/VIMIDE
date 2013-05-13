@@ -202,7 +202,7 @@ autocmd bufwritepost .vimrc source ~/.vimrc
 nnoremap <C-n> :NERDTreeToggle<cr>
 nmap <silent> <F8> :NERDTreeToggle<cr>:TlistToggle<CR>
 let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$','cscope\.*','.*\.swp$']
-let g:NERDTreeMouseMode = 3
+let g:NERDTreeMouseMode = 2
 let g:NERDTreeWinSize = 20
 
 """""""""""""""""""""""""""""""
@@ -329,10 +329,10 @@ nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 "create and update cscope and  project file
 nmap <F9> :!find . -iname '*.c' -o -iname '*.cpp' -o -iname '*.h' -o -iname '*.hpp' -o -iname '*.pl' -o -iname '*.py' > cscope.files<CR>
   \:!cscope -Rkbq -i cscope.files -f cscope.out<CR>
-  \:!cs kill -1<CR>:cs add cscope.out<CR>
+  \:cs kill -1<CR>:cs add cscope.out<CR>
   \:!ctags -R<CR>
 
-
+map ,pt :%! perltidy<CR>
 
 """""""""""""""""""""""""""""""
 " quickfix plugin settings
