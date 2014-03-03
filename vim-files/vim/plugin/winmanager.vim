@@ -24,12 +24,7 @@ if !exists("g:winManagerWidth")
 	let g:winManagerWidth = 25
 end
 
-"set auto open Winmanager
-if g:AutoOpenWinManager
-	autocmd VimEnter * nested call s:StartWindowsManager()|1wincmd w 
-endif
-
-"whether to close winmanager if only explorer windows are visible.
+" whether to close winmanager if only explorer windows are visible.
 if !exists("g:persistentBehaviour")
 	let g:persistentBehaviour = 1
 end

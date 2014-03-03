@@ -1,42 +1,47 @@
-" ========== Vim Basic Settings ============="
-
-" Pathogen settings.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"     make a VIM IDE for myself -- Feng Guoqing
+"
+" Sections:
+"    -> General
+"    -> Text, tab and indent related
+"    -> vimgrep searching
+"    -> Colors and Fonts
+"    -> Editing mappings
+"    -> Plugin Settings
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Pathogen settings.Easy manipulation of 'runtimepath', 'path', 'tags', etc
 filetype off
 call pathogen#incubate()
-filetype plugin indent on
+
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
 
 " Make vim incompatbile to vi.
 set nocompatible
 set modelines=0
 
-"TAB settings.
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set expandtab
-
-" More Common Settings.
-set encoding=utf-8
-set scrolloff=3
-set autoindent
 set showmode
 set showcmd
+
 set hidden
 set wildmenu
 set wildmode=list:longest
-"set visualbell
 
-set cursorline
+set scrolloff=3
+
 set ttyfast
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
 
-"set relativenumber
 set number
 set norelativenumber
 
-"set undofile
 set shell=/bin/bash
 set lazyredraw
 set matchtime=3
@@ -47,31 +52,20 @@ let mapleader = ","
 " Set title to window
 set title
 
+" Enable Mouse
+set mouse=a
+
 " Dictionary path, from which the words are being looked up.
 set dictionary=/usr/share/dict/words
 
 " Make pasting done without any indentation break."
-set pastetoggle=<F3>
+set pastetoggle=<F11>
 
 " Make Vim able to edit corntab fiels again.
 set backupskip=/tmp/*,/private/tmp/*"
 
-" Enable Mouse
-set mouse=a
-
-"Settings for Searching and Moving
-nnoremap / /\v
-vnoremap / /\v
-set ignorecase
-set smartcase
-set gdefault
-set incsearch
-set showmatch
-set hlsearch
-nnoremap <leader><space> :noh<cr>
-nnoremap <tab> %
-vnoremap <tab> %
-
+" disable the auto-initialization jedi
+let g:jedi#auto_initialization = 0
 
 " Make Vim to handle long lines nicely.
 set wrap
@@ -80,19 +74,78 @@ set formatoptions=qrn1
 "set colorcolumn=79
 
 " To  show special characters in Vim
-"set list
-set listchars=tab:▸\ ,eol:¬
+set listchars=tab:>-,trail:-,eol:$
+
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+"set nowb
+"set noswapfile
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"TAB settings.
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set autoindent
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vimgrep searching
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable syntax highlighting
+syntax enable
+
+colorscheme koehler
+"colorscheme default
+"set background=dark
+
+" Set extra options when running in GUI mode
+if has("gui_running")
+    set guioptions-=T
+    set guioptions+=e
+    set t_Co=256
+    set guitablabel=%M\ %t
+endif
+
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Settings for Searching and Moving
+nnoremap / /\v
+vnoremap / /\v
+
+nnoremap <leader><space> :noh<cr>
+nnoremap <tab> %
+vnoremap <tab> %
 
 " Naviagations using keys up/down/left/right
 " Disabling default keys to learn the hjkl
-"nnoremap <up> <nop>
-"nnoremap <down> <nop>
-"nnoremap <left> <nop>
-"nnoremap <right> <nop>
-"inoremap <up> <nop>
-"inoremap <down> <nop>
-"inoremap <left> <nop>
-"inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
@@ -106,9 +159,6 @@ vnoremap <F1> <ESC>
 
 " Map : to ; also in command mode.
 nnoremap ; :
-
-" Set vim to save the file on focus out.
-au FocusLost * :wa
 
 " Adding More Shorcuts keys using leader kye.
 " Leader Kye provide separate namespace for specific commands.
@@ -130,13 +180,24 @@ nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
 " jj For Qicker Escaping between normal and editing mode.
 "inoremap jj <ESC>
 
+nnoremap g; g;zz
 
 " Working with split screen nicely
 " Resize Split When the window is resized"
 au VimResized * :wincmd =
 
 
-" Wildmenu completion "
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin Settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"自动补全
+"filetype plugin indent off
+set completeopt=longest,menu
+
+"""""""""""""""""""""""""""""""
+" Wildmenu completion
+"""""""""""""""""""""""""""""""
 set wildmenu
 set wildmode=list:longest
 set wildignore+=.hg,.git,.svn " Version Controls"
@@ -159,42 +220,6 @@ augroup line_return
         \ execute 'normal! g`"zvzz' |
         \ endif
 augroup END
-
-nnoremap g; g;zz
-
-" =========== END Basic Vim Settings ===========
-
-
-" =========== Gvim Settings =============
-
-" Removing scrollbars
-"if has("gui_running")
-"   set guitablabel=%-0.12t%M
-"    set guioptions-=T
-"   set guioptions-=r
-"   set guioptions-=L
-"    set guioptions+=a
-"    set guioptions-=m
-"    colo badwolf
-"    set listchars=tab:▸\ ,eol:¬         " Invisibles using the Textmate style
-"else
-"    set t_Co=256
-"    colorschem cloudsxterm
-"endif
-
-" Special Settings for Consoles
-"if !has("gui_running")
-    set t_Co=256
-    colorschem badwolf
-"endif
-
-" Source the vimrc file after saving it
-autocmd bufwritepost .vimrc source ~/.vimrc
-
-" ========== END Gvim Settings ==========
-
-
-" ========== Plugin Settings =========="
 
 """""""""""""""""""""""""""""""
 " Mapping to NERDTree

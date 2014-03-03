@@ -15,22 +15,20 @@ set background=dark
 
 hi clear
 if exists("syntax_on")
-	syntax reset
+    syntax reset
 endif
 
 let colors_name = "rdark"
 
 " Current Line
 if exists('rdark_current_line') && rdark_current_line == 1
-	set cursorline
-	hi CursorLine guibg=#323232
+    set cursorline
+    hi CursorLine guibg=#191f21
 endif
 
-hi CursorLine guibg=#323232
 " Default Colors
-hi Normal guifg=#efefef guibg=#202020
-"hi NonText guifg=#999999 guibg=NONE gui=none
-hi NonText guifg=#666666 guibg=NONE gui=none
+hi Normal guifg=#babdb6 guibg=#1e2426
+hi NonText guifg=#2c3032 guibg=#2c3032 gui=none
 hi Cursor guibg=#babdb6
 hi ICursor guibg=#babdb6
 
@@ -41,20 +39,19 @@ hi IncSearch guibg=#2e3436 guifg=#fcaf3e
 " Window Elements
 hi StatusLine guifg=#2e3436 guibg=#babdb6 gui=none
 hi StatusLineNC guifg=#2e3436 guibg=#888a85 gui=none
-"hi VertSplit guifg=#555753 guibg=#888a85 gui=none
-hi VertSplit guifg=#888a85 gui=none
-hi Visual guibg=#96809c
+hi VertSplit guifg=#555753 guibg=#888a85 gui=none
+hi Visual guibg=#000000
 hi MoreMsg guifg=#729fcf
 hi Question guifg=#8ae234 gui=none
 hi WildMenu guifg=#eeeeec guibg=#0e1416
-hi LineNr guifg=#999999 guibg=NONE
+hi LineNr guifg=#3f4b4d guibg=#000000
 hi SignColumn guibg=#1e2426
 
 " Pmenu
 hi Pmenu guibg=#2e3436 guifg=#eeeeec
-hi PmenuSel guibg=#efefef guifg=#1e2426
+hi PmenuSel guibg=#ffffff guifg=#1e2426
 hi PmenuSbar guibg=#555753
-hi PmenuThumb guifg=#efefef
+hi PmenuThumb guifg=#ffffff
 
 " Diff
 hi DiffDelete guifg=#2e3436 guibg=#0e1416
@@ -64,15 +61,12 @@ hi DiffText guibg=#000000 gui=none
 
 " Folds
 hi Folded guifg=#d3d7cf guibg=#204a87
-hi FoldColumn guifg=#3465a4 guibg=NONE
+hi FoldColumn guifg=#3465a4 guibg=#000000
 
 " Specials
 hi Title guifg=#fcaf3e
 hi Todo guifg=#fcaf3e guibg=bg
-"hi SpecialKey guifg=#999999
-hi SpecialKey guifg=#333333
-highlight NonText guifg=#333333
-		
+hi SpecialKey guifg=#ef2929
 
 " Tabs
 hi TabLine guibg=#0a1012 guifg=#888a85
@@ -83,22 +77,16 @@ hi TabLineSel guibg=#555753 guifg=#eeeeec gui=none
 hi MatchParen guifg=#2e3436 guibg=#fcaf3e
 
 " Tree
-hi Directory guifg=#efefef
+hi Directory guifg=#ffffff
 
 " Syntax
-"hi Comment guifg=#656763
-hi Comment guifg=#999999
-"hi Constant guifg=#8ae234
-hi Constant guifg=#3f9bd1
-"hi Number guifg=#8ae234
-hi Number guifg=#3f9bd1
-"hi Statement guifg=#729fcf gui=none
-hi Statement guifg=#d78a4f gui=none
-hi Identifier guifg=#efefef
-"hi PreProc guifg=#fcaf3e
-hi PreProc guifg=#d78a4f
-"hi Function guifg=#fcaf3e
-hi Function guifg=#d78a4f gui=BOLD
+hi Comment guifg=#656763
+hi Constant guifg=#8ae234
+hi Number guifg=#8ae234
+hi Statement guifg=#729fcf gui=none
+hi Identifier guifg=#ffffff
+hi PreProc guifg=#fcaf3e
+hi Function guifg=#fcaf3e
 hi Type guifg=#e3e7df gui=none
 hi Keyword guifg=#eeeeec
 hi Special guifg=#888a85
@@ -121,15 +109,12 @@ hi phpParent guifg=#888a85
 
 " JavaScript
 hi javaScriptBraces guifg=#888a85
-hi javaScriptOperator guifg=#efefef
+hi javaScriptOperator guifg=#888a85
 
 " HTML
-"hi htmlTag guifg=#888a85
-hi htmlTag guifg=#efefef
-"hi htmlEndTag guifg=#888a85
-hi htmlEndTag guifg=#efefef
-"hi htmlTagName guifg=#babdb6
-hi htmlTagName guifg=#efefef
+hi htmlTag guifg=#888a85
+hi htmlEndTag guifg=#888a85
+hi htmlTagName guifg=#babdb6
 hi htmlSpecialTagName guifg=#babdb6
 hi htmlArg guifg=#d3d7cf
 hi htmlTitle guifg=#8ae234 gui=none
@@ -139,8 +124,6 @@ hi link htmlH3 htmlH1
 hi link htmlH4 htmlH1
 hi link htmlH5 htmlH1
 hi link htmlH6 htmlH1
-hi htmlHead guifg=#efefef
-hi javaScript guifg=#efefef
 
 " XML
 hi link xmlTag htmlTag
@@ -174,18 +157,3 @@ hi link cssBoxAttr Constant
 hi link cssTextAttr Constant
 hi link cssColorAttr Constant
 hi link cssFontAttr Constant
-
-
-hi djangoTagBlock guifg=#efefef
-
-"Todo colors
-hi todoStateTODO guifg=#8ae234
-hi todoDone guifg=#fcaf3e
-
-"Mini buffer Explorer
-hi MBEVisibleNormal guifg=#fcaf3e
-hi MBEVisibleChanged guifg=#fcaf3e
-"Nerdtree
-hi treeOpenable guifg=#afafaf
-hi treeFile guifg=#afafaf
-hi treeExecFile guifg=#afafaf
